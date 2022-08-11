@@ -14,6 +14,31 @@ public class SodukoSolverGreedyBacktrack {
 				{0,8,3,0,0,0,0,6,0},
 				{0,0,7,6,9,0,0,4,3},
 		};
+		
+	
+	}
+	
+	private static int [] [] solver(int[][]s){
+
+		int[] vert = new int[9];
+		int[] hori = new int[9];
+		int[] box = new int[9];
+		for(int i = 0;i < 9;i++) {
+			
+		}
+		for(int i = 0;i < 9;i++) {
+			
+			for(int j = 0;j< 9;j++) {
+				if(s[i][j] == 0) {
+					for(int k = 1;k < 10;k++) {
+						
+						s[i][j] = k;
+					}
+				}
+			}
+		}
+		
+		return s;
 	}
 
 	private static boolean vertical(int[] vertical, int indexToCheck) {
