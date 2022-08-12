@@ -15,7 +15,7 @@ public class SodukoSolverGreedyBacktrack {
 				{0,0,7,6,9,0,0,4,3},
 		};
 		
-	
+		print2DMatrix(solver(soduko));
 	}
 	
 	private static int [] [] solver(int[][]s){
@@ -23,16 +23,41 @@ public class SodukoSolverGreedyBacktrack {
 		int[] vert = new int[9];
 		int[] hori = new int[9];
 		int[] box = new int[9];
+		int temp = 0;
 		for(int i = 0;i < 9;i++) {
-			
+			vert[i] = s[temp][i];
+			hori[i] = s[i][temp];
 		}
+
+		
+		int whileLoop = 0;
+		int counter = 0;
+		int row = 0;
+		while(counter < 9) {
+			box[counter] = s[row][whileLoop];
+			counter++;
+			if(counter % 3 == 0) {
+				row++;
+				whileLoop = 0;
+			}
+			whileLoop++;
+		}
+		
+		
+		//_______SETUP ABOVE THIS LINE__________
+		
 		for(int i = 0;i < 9;i++) {
 			
 			for(int j = 0;j< 9;j++) {
 				if(s[i][j] == 0) {
 					for(int k = 1;k < 10;k++) {
-						
-						s[i][j] = k;
+						if(vertical(vert,k))
+							if(horizontal(hori,k))
+								if(box(box,k)) {
+									s[i][j] = k;
+									if(i != 8 && j != 8)
+										s = solver(s);
+								}
 					}
 				}
 			}
@@ -70,5 +95,15 @@ public class SodukoSolverGreedyBacktrack {
 			j++;
 		}
 		return true;
+	}
+	
+	private static void print2DMatrix(int[][] s) {
+		for(int i = 0;i < 9;i++) {
+			
+			for(int j = 0;j< 9;j++) {
+				System.out.print(s[i][j] + " ");
+			}
+			System.out.println("");
+		}
 	}
 }
